@@ -480,16 +480,15 @@ index 11c1eb6995ec3aa896815efa59477096c39089d1..762728e490a152d159684324e200ab0d
  
 +    // Leaves start - replay mod api
 +    public void removePhotographer(org.leavesmc.leaves.replay.ServerPhotographer entityplayer) {
-+        if (photographer != null) {
-+           photographer.connection.disconnect(Component.literal("Photographer removed"));
-+        }
-+
 +        ServerLevel worldserver = entityplayer.level();
 +
 +        entityplayer.awardStat(Stats.LEAVE_GAME);
 +
 +        if (entityplayer.containerMenu != entityplayer.inventoryMenu) {
 +            entityplayer.closeContainer(org.bukkit.event.inventory.InventoryCloseEvent.Reason.DISCONNECT);
++        }
++        if (photographer != null) {
++           photographer.connection.disconnect(Component.literal("Photographer removed"));
 +        }
 +
 +        if (server.isSameThread()) entityplayer.doTick();
