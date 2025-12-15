@@ -480,17 +480,10 @@ index 11c1eb6995ec3aa896815efa59477096c39089d1..762728e490a152d159684324e200ab0d
  
 +    // Leaves start - replay mod api
 +    public void removePhotographer(org.leavesmc.leaves.replay.ServerPhotographer entityplayer) {
-         if (photographer != null) {
-
-           this.players.remove(photographer);
-           this.playersByName.remove(photographer.getScoreboardName().toLowerCase());
-           this.playersByUUID.remove(photographer.getUUID());
-
-           if (photographer.level() instanceof ServerLevel serverLevel) {
-               serverLevel.getChunkSource().chunkMap.removeEntity(photographer);
-           }
-           photographer.markRemoved();
-       }
++        if (photographer != null) {
++           photographer.connection.disconnect(Component.literal("Photographer removed"));
++        }
++
 +        ServerLevel worldserver = entityplayer.level();
 +
 +        entityplayer.awardStat(Stats.LEAVE_GAME);
